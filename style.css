@@ -92,70 +92,79 @@ header h2 {
     font-size: 1.5em;
     margin-bottom: 20px;
 }
-
 #topic-buttons-grid {
     display: grid;
     grid-template-columns: 1fr; /* טור יחיד */
-    gap: 12px; 
+    gap: 12px;
     margin-top: 15px;
+    margin-bottom: 20px;
 }
 
 .topic-btn {
     padding: 15px 10px;
     font-size: 1em;
-    color: white; /* צבע טקסט לבן שיתאים לרקע צבעוני */
-    border: none;
+    color: white;
+    border: 3px solid transparent; /* נשאר שקוף */
     border-radius: 10px;
     cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.2s; 
+    transition: transform 0.1s, box-shadow 0.2s, border-color 0.2s;
     text-align: center;
     line-height: 1.3;
-    font-weight: bold; 
+    font-weight: bold;
 }
-
 .topic-btn:hover {
-    transform: translateY(-2px); 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.topic-btn.selected {
+    border-color: white; /* הדגשה בלבן לבחירה */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: none; 
 }
 
-.word-count {
-    display: block;
-    font-size: 0.7em;
-    opacity: 0.8;
-}
-
-/* --- אזור הכרטיסייה --- */
-.card-area {
-    margin-top: 20px;
-}
-
-/* הסרת עיצוב הרמז העברי */
-.hebrew-hint {
-    font-size: 0; 
-    color: transparent;
-    margin: 0;
-    min-height: 0;
-    padding: 0;
-}
-
-.card-container {
-    perspective: 1000px; 
+.start-multiple-btn {
     width: 100%;
-    height: 200px;
-    margin: 0 auto 30px;
-}
-
-.card {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d; 
+    padding: 15px;
+    font-size: 1.2em;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.start-multiple-btn:hover:not(:disabled) {
+    background-color: #1e7e34;
+}
+.start-multiple-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
-.card.is-flipped {
+/* --- כרטיסיות תרגול (Flashcards) --- */
+.flashcard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flashcard {
+    perspective: 1000px;
+    width: 250px;
+    height: 150px;
+    margin: 20px auto;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.flashcard.flipped {
     transform: rotateY(180deg);
 }
 
@@ -163,98 +172,93 @@ header h2 {
     position: absolute;
     width: 100%;
     height: 100%;
+    backface-visibility: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em; 
+    font-size: 1.5em;
     font-weight: bold;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    backface-visibility: hidden; 
+    border-radius: 15px;
     padding: 10px;
     box-sizing: border-box;
-    line-height: 1.2; 
 }
 
 .card-front {
-    background-color: #007bff; 
-    color: white;
+    background-color: #f8d7da; /* אדום בהיר */
+    color: #721c24; 
+    border: 3px solid #f5c6cb;
 }
 
 .card-back {
-    background-color: #ffc107; 
-    color: #333;
+    background-color: #d4edda; /* ירוק בהיר */
+    color: #155724; 
+    border: 3px solid #c3e6cb;
     transform: rotateY(180deg);
-    font-size: 1.8em;
 }
 
-/* כפתור המעבר */
 #next-card-btn {
     padding: 10px 20px;
-    font-size: 1.1em;
-    background-color: #6c757d; 
+    font-size: 1em;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     font-weight: bold;
+    transition: background-color 0.2s;
     display: flex;
     align-items: center;
-    margin: 0 auto;
-    transition: background-color 0.2s;
+    justify-content: center;
 }
-
 #next-card-btn:hover {
-    background-color: #5a6268;
+    background-color: #0056b3;
 }
-
-.arrow {
-    margin-left: 8px;
+#next-card-btn .arrow {
+    margin-left: 8px; 
     font-size: 1.2em;
 }
 
 #card-counter {
     margin-top: 15px;
-    font-size: 1em;
+    font-size: 0.9em;
     color: #6c757d;
 }
 
-/* --- עיצוב מבחן --- */
-.score-display {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #007bff;
+/* --- מצב מבחן (Quiz) --- */
+.quiz-content {
     margin-bottom: 20px;
-    padding: 5px;
-    border: 1px solid #007bff;
-    border-radius: 5px;
-    display: inline-block;
+}
+
+.score-display {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #6c757d;
+    margin-bottom: 15px;
 }
 
 .quiz-question-text {
-    font-size: 1.1em;
-    color: #6c757d;
+    font-size: 1em;
+    color: #495057;
     margin-bottom: 5px;
 }
-
 .quiz-question {
-    font-size: 2.5em;
+    font-size: 1.8em;
     font-weight: bold;
-    color: #d9534f;
+    color: #007bff;
     margin-bottom: 20px;
-    min-height: 50px; 
+    padding: 10px;
+    border-bottom: 1px solid #ced4da;
 }
 
 .answer-options-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* 2 עמודות */
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .answer-btn {
-    padding: 15px 10px;
-    font-size: 1.2em;
+    padding: 12px 10px;
     border: 2px solid #007bff;
     border-radius: 8px;
     background-color: white;
@@ -299,37 +303,25 @@ header h2 {
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.2s;
+    margin-top: 10px;
 }
 #next-quiz-btn:hover, #start-quiz-again-btn:hover {
     background-color: #1e7e34;
 }
 
-/* סיכום */
+#quiz-summary {
+    padding: 20px;
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    background-color: #fff3cd;
+    color: #856404;
+    margin-top: 20px;
+}
 #quiz-summary h3 {
-    color: #007bff;
+    margin-top: 0;
+    color: #ffc107;
 }
-#final-score-text {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-/* מדיה קוואריס */
-@media (max-width: 400px) {
-    h1 {
-        font-size: 1.8em;
-    }
-    .card-face {
-        font-size: 1.8em;
-    }
-    .card-back {
-        font-size: 1.6em;
-    }
-    #back-to-topics-btn, #back-to-topics-btn-quiz {
-        font-size: 0.7em;
-        padding: 6px;
-    }
-    .answer-options-grid {
-        grid-template-columns: 1fr;
-    }
+#quiz-summary p {
+    font-size: 1.3em;
+    line-height: 1.5;
 }

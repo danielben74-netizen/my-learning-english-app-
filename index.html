@@ -13,27 +13,31 @@
 
         <div id="mode-selector" class="mode-selector">
             <button id="flashcard-mode-btn" class="active">מצב תרגול (כרטיסיות)</button>
-            <button id="quiz-mode-btn">מצב משחק (מבחן)</button>
+            <button id="quiz-mode-btn">מצב מבחן (אנגלית ⬅️ עברית)</button>
         </div>
         
         <div id="topic-selection-area">
-            <h2>בחר נושא:</h2>
+            <h2>בחר נושאים לתרגול:</h2>
             <div id="topic-buttons-grid" class="topic-buttons-grid">
                 </div>
+            <button id="start-selected-topics-btn" disabled class="start-multiple-btn" style="display: none;">
+                התחל תרגול!
+            </button>
         </div>
 
         <div id="flashcard-area" style="display: none;">
             <header>
                 <button id="back-to-topics-btn">חזור 🏠</button>
-                <h2 id="topic-title"></h2>
+                <h2 id="flashcard-topic-title"></h2>
             </header>
-
-            <div class="card-area">
-                <div id="hebrew-hint-display" class="hebrew-hint"></div> 
-                <div class="card-container">
-                    <div class="card" id="flashcard">
-                        <div class="card-face card-front"><span id="english-word"></span></div>
-                        <div class="card-face card-back"><span id="hebrew-translation"></span></div>
+            
+            <div class="flashcard-container">
+                <div id="flashcard" class="flashcard">
+                    <div class="card-face card-front">
+                        <span id="card-content-english"></span>
+                    </div>
+                    <div class="card-face card-back">
+                        <span id="card-content-hebrew"></span>
                     </div>
                 </div>
                 <button id="next-card-btn">
@@ -52,7 +56,7 @@
             <div class="quiz-content">
                 <div id="score-display" class="score-display">ניקוד: 0 / 0</div>
                 
-                <p class="quiz-question-text">מה הפירוש של: </p>
+                <p id="quiz-question-prefix" class="quiz-question-text">מה הפירוש של המילה האנגלית:</p>
                 <div id="quiz-question-hebrew" class="quiz-question"></div>
                 
                 <div id="answer-options-grid" class="answer-options-grid">
@@ -66,12 +70,12 @@
             <div id="quiz-summary" style="display: none;">
                 <h3>סיימת את המבחן!</h3>
                 <p id="final-score-text"></p>
-                <button id="start-quiz-again-btn">התחל מחדש</button>
+                <button id="start-quiz-again-btn" class="start-multiple-btn">התחל מבחן מחדש (עם אותם נושאים)</button>
             </div>
         </div>
-
+        
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
