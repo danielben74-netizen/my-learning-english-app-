@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אפליקציית כרטיסיות ומשחק - 25 נושאים סופיים</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <h1>אפליקציית כרטיסיות ללימוד אנגלית</h1>
+
+        <div id="mode-selector" class="mode-selector">
+            <button id="flashcard-mode-btn" class="active">מצב תרגול (כרטיסיות)</button>
+            <button id="quiz-mode-btn">מצב משחק (מבחן)</button>
+        </div>
+        
+        <div id="topic-selection-area">
+            <h2>בחר נושא:</h2>
+            <div id="topic-buttons-grid" class="topic-buttons-grid">
+                </div>
+        </div>
+
+        <div id="flashcard-area" style="display: none;">
+            <header>
+                <button id="back-to-topics-btn">חזור 🏠</button>
+                <h2 id="topic-title"></h2>
+            </header>
+
+            <div class="card-area">
+                <div id="hebrew-hint-display" class="hebrew-hint"></div>
+                <div class="card-container">
+                    <div class="card" id="flashcard">
+                        <div class="card-face card-front"><span id="english-word"></span></div>
+                        <div class="card-face card-back"><span id="hebrew-translation"></span></div>
+                    </div>
+                </div>
+                <button id="next-card-btn">
+                    <span class="arrow">⬇️</span> כרטיסייה הבאה
+                </button>
+                <div id="card-counter"></div>
+            </div>
+        </div>
+        
+        <div id="quiz-area" style="display: none;">
+            <header>
+                <button id="back-to-topics-btn-quiz">חזור 🏠</button>
+                <h2 id="quiz-topic-title"></h2>
+            </header>
+            
+            <div class="quiz-content">
+                <div id="score-display" class="score-display">ניקוד: 0 / 0</div>
+                
+                <p class="quiz-question-text">מה הפירוש של: </p>
+                <div id="quiz-question-hebrew" class="quiz-question"></div>
+                
+                <div id="answer-options-grid" class="answer-options-grid">
+                    </div>
+                
+                <div id="quiz-feedback" class="quiz-feedback"></div>
+                
+                <button id="next-quiz-btn" style="display: none;">המשך לשאלה הבאה</button>
+            </div>
+            
+            <div id="quiz-summary" style="display: none;">
+                <h3>סיימת את המבחן!</h3>
+                <p id="final-score-text"></p>
+                <button id="start-quiz-again-btn">התחל מחדש</button>
+            </div>
+        </div>
+
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

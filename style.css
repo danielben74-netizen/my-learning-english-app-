@@ -1,0 +1,335 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #f0f4f8, #c8d9e9); 
+    direction: rtl;
+    color: #333;
+    padding: 10px; /* מרווח כללי לנייד */
+}
+
+.container {
+    width: 100%; /* רוחב מלא בנייד */
+    max-width: 600px; 
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+h1 {
+    color: #007bff; 
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* --- בורר מצבים --- */
+.mode-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ced4da;
+}
+.mode-selector button {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: none;
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+.mode-selector button.active {
+    background-color: #007bff;
+    color: white;
+}
+.mode-selector button:not(.active):hover {
+    background-color: #e9ecef;
+}
+
+/* --- כותרות וכפתור חזור --- */
+header {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+header h2 {
+    color: #28a745; 
+    margin: 0;
+    font-size: 1.5em;
+}
+
+#back-to-topics-btn, #back-to-topics-btn-quiz {
+    position: absolute;
+    top: 5px;
+    right: 0; 
+    padding: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background-color 0.2s;
+}
+#back-to-topics-btn:hover, #back-to-topics-btn-quiz:hover {
+    background-color: #e2e6ea;
+}
+
+/* --- מסך בחירת נושא --- */
+#topic-selection-area h2 {
+    color: #6c757d;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+#topic-buttons-grid {
+    display: grid;
+    /* התאמה אוטומטית לרוחב קטן יותר בנייד */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.topic-btn {
+    padding: 10px;
+    font-size: 0.9em;
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    text-align: center;
+    line-height: 1.2;
+}
+.topic-btn:hover {
+    background-color: #1e7e34;
+    transform: scale(1.02);
+}
+.word-count {
+    display: block;
+    font-size: 0.7em;
+    opacity: 0.8;
+}
+
+/* --- אזור הכרטיסייה --- */
+.card-area {
+    margin-top: 20px;
+}
+
+/* עיצוב הרמז העברי */
+.hebrew-hint {
+    color: #6c757d;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    min-height: 1.5em; /* שומר על מקום קבוע גם אם ריק */
+}
+
+.card-container {
+    perspective: 1000px; 
+    width: 100%;
+    height: 200px;
+    margin: 0 auto 30px;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d; 
+    cursor: pointer;
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em; 
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    backface-visibility: hidden; 
+    padding: 10px;
+    box-sizing: border-box;
+    line-height: 1.2; 
+}
+
+.card-front {
+    background-color: #007bff; 
+    color: white;
+}
+
+.card-back {
+    background-color: #ffc107; 
+    color: #333;
+    transform: rotateY(180deg);
+    font-size: 1.8em;
+}
+
+/* כפתור המעבר */
+#next-card-btn {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    background-color: #6c757d; 
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    transition: background-color 0.2s;
+}
+
+#next-card-btn:hover {
+    background-color: #5a6268;
+}
+
+.arrow {
+    margin-left: 8px;
+    font-size: 1.2em;
+}
+
+#card-counter {
+    margin-top: 15px;
+    font-size: 1em;
+    color: #6c757d;
+}
+
+/* --- עיצוב מבחן --- */
+.score-display {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 20px;
+    padding: 5px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.quiz-question-text {
+    font-size: 1.1em;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.quiz-question {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #d9534f; /* אדום חזק לשאלה */
+    margin-bottom: 20px;
+    min-height: 50px; 
+}
+
+.answer-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 כפתורים בשורה */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.answer-btn {
+    padding: 15px 10px;
+    font-size: 1.2em;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    background-color: white;
+    color: #007bff;
+    cursor: pointer;
+    transition: background-color 0.15s, transform 0.1s;
+    font-weight: bold;
+}
+.answer-btn:hover:not(:disabled) {
+    background-color: #eaf3ff;
+}
+
+/* מצבי תשובה */
+.answer-btn.correct {
+    background-color: #28a745; /* ירוק */
+    color: white;
+    border-color: #1e7e34;
+}
+.answer-btn.incorrect {
+    background-color: #dc3545; /* אדום */
+    color: white;
+    border-color: #bd2130;
+}
+.answer-btn:disabled {
+    opacity: 0.8;
+    cursor: default;
+}
+
+#quiz-feedback {
+    font-size: 1.2em;
+    font-weight: bold;
+    min-height: 24px;
+    margin-bottom: 10px;
+}
+
+#next-quiz-btn, #start-quiz-again-btn {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+#next-quiz-btn:hover, #start-quiz-again-btn:hover {
+    background-color: #1e7e34;
+}
+
+/* סיכום */
+#quiz-summary h3 {
+    color: #007bff;
+}
+#final-score-text {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* מדיה קוואריס (Media Queries) */
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    .card-face {
+        font-size: 1.8em;
+    }
+    .card-back {
+        font-size: 1.6em;
+    }
+    #back-to-topics-btn, #back-to-topics-btn-quiz {
+        font-size: 0.7em;
+        padding: 6px;
+    }
+    .answer-options-grid {
+        grid-template-columns: 1fr; /* כפתור אחד בשורה במסכים צרים מאוד */
+    }
+}
